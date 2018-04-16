@@ -20,6 +20,10 @@ resource "aws_security_group" "web-pub-sg" {
     description = "me"
   }
 
+  # Important note:
+  # By default, AWS create an "allow all" outbound rule whenever we create a VPC security group.
+  # However, when we create our own security group with Terraform,
+  # this default egress rule is removed, hence we need to add this rule again manually
   egress {
     from_port = 0
     to_port = 0
