@@ -1,3 +1,4 @@
+# Route table configurations for public VPC
 resource "aws_route_table" "web-route-table" {
   vpc_id = "${aws_vpc.web-vpc.id}"
 
@@ -23,4 +24,18 @@ resource "aws_route" "web-pub-route" {
 resource "aws_route_table_association" "web-pub" {
   subnet_id = "${aws_subnet.web-pub.id}"
   route_table_id = "${aws_route_table.web-route-table.id}"
+}
+
+# Route table configurations for private VPC
+resource "aws_route_table" "shared-route-table" {
+  vpc_id = "${aws_vpc.shared-vpc.id}"
+
+  tags {
+    Name = "shared"
+  }
+}
+
+resource "aws_route_table_association" "shared" {
+  subnet_id = "${aws_subnet.shared-subnet.id}"
+  route_table_id = "${aws_route_table.shared-route-table.id}"
 }

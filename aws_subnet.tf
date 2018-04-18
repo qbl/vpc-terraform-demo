@@ -10,12 +10,12 @@ resource "aws_subnet" "web-pub" {
 }
 
 # Database private subnet
-resource "aws_subnet" "database" {
+resource "aws_subnet" "shared-subnet" {
   vpc_id = "${aws_vpc.shared-vpc.id}"
   cidr_block = "10.2.2.0/24"
   availability_zone = "ap-southeast-1a"
 
   tags {
-    Name = "web-pub"
+    Name = "shared-subnet"
   }
 }
