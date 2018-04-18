@@ -1,3 +1,4 @@
+# Public security group
 resource "aws_security_group" "web-pub-sg" {
   vpc_id = "${aws_vpc.web-vpc.id}"
 
@@ -33,5 +34,40 @@ resource "aws_security_group" "web-pub-sg" {
 
   tags {
     Name = "web-pub-sg"
+  }
+}
+
+# Private security group
+resource "aws_security_group" "database-sg" {
+  vpc_id = "${aws_vpc.shared-vpc.id}"
+
+  name = "database-sg-sg"
+  description = "database subnet sg"
+
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "TCP"
+    cidr_blocks = ["192.168.0.0/16", "10.2.0.0/16"]
+    description = "internal ssh"
+  }
+
+  ingress {
+    from_port = 3306
+    to_port = 3306
+    protocol = "TCP"
+    cidr_blocks = ["10.1.254.0/24"]
+    description = "web-pub subnet"
+  }
+
+  ingress {
+    from_port = 8
+    to_port = 0
+    protocol = "ICMP"
+    cidr_block = ["10.0.1.0/24"]
+  }
+
+  tags {
+    Name = "database-sg"
   }
 }

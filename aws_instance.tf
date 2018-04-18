@@ -22,3 +22,27 @@ resource "aws_instance" "www1" {
     ignore_changes = ["ami"]
   }
 }
+
+resource "aws_instance" "www1" {
+  ami = "${data.aws_ami.ami-11c9be72.id}"
+  key_name = "${var.aws_key_name}"
+  instance_type = "t2.micro"
+
+  vpc_id = "${aws_vpc.web-vpc.id}"
+  subnet_id = "${aws_subnet.shared-subnet.id}"
+  private_ip = "10.2.2.41"
+
+  root_block_device {
+    delete_on_termination = true
+    volume_size = "8"
+    volume_type = "gp2"
+  }
+
+  tags {
+    Name = "db1"
+  }
+
+  lifecycle {
+    ignore_changes = ["ami"]
+  }
+}
