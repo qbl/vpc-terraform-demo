@@ -8,7 +8,7 @@ resource "aws_vpc" "web-vpc" {
 }
 
 # Private VPC
-resource "aws_vpc" "shared_vpc" {
+resource "aws_vpc" "shared-vpc" {
   cidr_block = "10.2.0.0/16"
 
   tags {

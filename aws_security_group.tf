@@ -8,7 +8,7 @@ resource "aws_security_group" "web-pub-sg" {
   ingress {
     from_port = 80
     to_port = 80
-    protocol = "TCP"
+    protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "the internet"
   }
@@ -16,8 +16,8 @@ resource "aws_security_group" "web-pub-sg" {
   ingress {
     from_port = 22
     to_port = 22
-    protocol = "TCP"
-    cidr_blocks = ["117.102.111.115/32"]
+    protocol = "tcp"
+    cidr_blocks = ["117.102.111.114/32"]
     description = "me"
   }
 
@@ -47,7 +47,7 @@ resource "aws_security_group" "database-sg" {
   ingress {
     from_port = 22
     to_port = 22
-    protocol = "TCP"
+    protocol = "tcp"
     cidr_blocks = ["192.168.0.0/16", "10.2.0.0/16"]
     description = "internal ssh"
   }
@@ -55,7 +55,7 @@ resource "aws_security_group" "database-sg" {
   ingress {
     from_port = 3306
     to_port = 3306
-    protocol = "TCP"
+    protocol = "tcp"
     cidr_blocks = ["10.1.254.0/24"]
     description = "web-pub subnet"
   }
@@ -63,8 +63,8 @@ resource "aws_security_group" "database-sg" {
   ingress {
     from_port = 8
     to_port = 0
-    protocol = "ICMP"
-    cidr_block = ["10.0.1.0/24"]
+    protocol = "icmp"
+    cidr_blocks = ["10.0.1.0/24"]
   }
 
   tags {
